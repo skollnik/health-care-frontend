@@ -7,6 +7,7 @@ import {
   LOGIN_VALIDATION_SCHEMA,
 } from "../auth.constants";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Button } from "../../shared/components/button.component";
 
 type FormValues = {
   email: string;
@@ -69,14 +70,13 @@ export const LoginPage = () => {
             )}
           </div>
           <div className="flex items-center justify-center">
-            <button
+            <Button
               onClick={handleSubmit(login)}
               disabled={!isValid}
               className="bg-[#8e9aaf] hover:bg-[#6f7c91] text-white font-bold py-2 px-7 rounded-3xl focus:outline-none focus:shadow-outline cursor-pointer"
-              type="button"
             >
               Sign In
-            </button>
+            </Button>
           </div>
         </form>
       </div>

@@ -15,5 +15,5 @@ export const AuthWrapper = ({ children, roles }: Props) => {
     return children;
   }
 
-  return <Navigate to={"/home"} />;
+  return <Navigate to={"/"} />;
 };

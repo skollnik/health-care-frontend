@@ -6,6 +6,7 @@ import { AuthWrapper } from "../auth/components/auth-wrapper";
 import { RegisterNewDoctorPage } from "../users/pages/register-new-doctor.page";
 import { RegisterNewPatientPage } from "../users/pages/register-new-patient.page";
 import { MedicationPage } from "../medication/pages/medication.page";
+import { AppointmentPage } from "../appointment/pages/appointment.page";
 
 export const routes: RouteObject[] = [
   {
@@ -40,6 +41,14 @@ export const routes: RouteObject[] = [
             element: (
               <AuthWrapper roles={["ADMINISTRATOR", "DOCTOR"]}>
                 <MedicationPage />
+              </AuthWrapper>
+            ),
+          },
+          {
+            path: "appointment",
+            element: (
+              <AuthWrapper roles={["ADMINISTRATOR", "DOCTOR", "PATIENT"]}>
+                <AppointmentPage />
               </AuthWrapper>
             ),
           },

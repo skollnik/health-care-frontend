@@ -36,8 +36,17 @@ export const LoginPage = () => {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handleSubmit(login)();
+    }
+  };
+
   return (
-    <div className="flex absolute w-[40%] top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] shadow-lg">
+    <div
+      onKeyDown={(e) => handleKeyDown(e)}
+      className="flex absolute w-[40%] top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] shadow-lg"
+    >
       <div className="bg-[#ede7e3] w-[50%] p-10">
         <h1 className="text-3xl font-bold text-center mb-10">Login</h1>
         <form>

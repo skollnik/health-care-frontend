@@ -58,6 +58,12 @@ export const Sidebar = () => {
             Medication
           </div>
         ) : null}
+        <div
+          className="w-full m-3 cursor-pointer hover:text-gray-300"
+          onClick={() => navigate("/appointment")}
+        >
+          Appointment
+        </div>
       </div>
       <div className="h-[10%] mb-5 flex items-center justify-center">
         <div

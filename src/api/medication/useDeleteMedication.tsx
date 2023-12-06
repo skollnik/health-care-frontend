@@ -1,6 +1,5 @@
-import React from "react";
-import { useAxios } from "../useAxios";
 import { toast } from "react-toastify";
+import { useAxios } from "../useAxios";
 
 export const useDeleteMedication = () => {
   const { axios } = useAxios();

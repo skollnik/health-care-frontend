@@ -1,8 +1,7 @@
-import "./App.css";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Sidebar } from "./shared/components/sidebar";
+import "./App.css";
 
 function App() {
   return (

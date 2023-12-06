@@ -110,7 +110,7 @@ export const RegisterNewDoctor = () => {
         <div className="mb-6">
           <select
             {...register("specialty")}
-            className="appearance-none border rounded bg-gray-50 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+            className="w-full border rounded bg-gray-50 py-2 px-3 text-gray-700 leading-tight focus:outline-none"
             id="grid-state"
           >
             {Object.keys(DoctorSpecialty).map((specialty) => (

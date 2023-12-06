@@ -1,10 +1,9 @@
-import { useForm } from "react-hook-form";
-import { DoctorSpecialty } from "../doctor-specialty.enum";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { PATIENT_REGISTRATION_VALIDATION_SCHEMA } from "../../auth/auth.constants";
-import { Gender } from "../gender.enum";
+import { useForm } from "react-hook-form";
 import { useRegisterPatient } from "../../api/specialization/useRegisterPatient";
+import { PATIENT_REGISTRATION_VALIDATION_SCHEMA } from "../../auth/auth.constants";
 import { Button } from "../../shared/components/button.component";
+import { Gender } from "../gender.enum";
 
 type FormValues = {
   firstName: string;
@@ -111,7 +110,7 @@ export const RegisterNewPatient = () => {
         <div className="mb-6">
           <select
             {...register("gender")}
-            className="appearance-none border rounded bg-gray-50 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+            className="w-full border rounded bg-gray-50 py-2 px-3 text-gray-700 leading-tight focus:outline-none"
             id="grid-state"
           >
             {Object.keys(Gender).map((gender) => (

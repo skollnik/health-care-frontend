@@ -38,7 +38,7 @@ export const MedicationPage = () => {
           onClick={openModal}
           className="bg-[#8e9aaf] hover:bg-[#6f7c91] text-white font-bold py-2 px-7 rounded-3xl focus:outline-none focus:shadow-outline cursor-pointer"
         >
-          Add new medication
+          Add new Medication
         </Button>
         <MedicationTableComponent
           loadAllMedications={loadAllMedications}

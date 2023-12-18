@@ -33,7 +33,7 @@ export const AddNewMedication = ({ onClose, loadAllMedications }: Props) => {
   return (
     <div className="w-full h-full rounded-md">
       <div className="w-full h-[10%] bg-[#16425b] flex items-center p-3 text-white">
-        <h1 className="text-3xl">Add new medication</h1>
+        <h1 className="text-3xl">Add new Medication</h1>
       </div>
       <div className="w-full flex flex-1 flex-col justify-center items-center bg-[#f6f4d2]">
         <input

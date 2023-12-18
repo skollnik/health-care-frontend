@@ -1,17 +1,31 @@
+import { useState } from "react";
+import Modal from "react-modal";
 import { Appointment as AppointmentModel } from "../model/appointment.model";
 import { getStatusColor } from "../status-color.type";
 import { getDateFormatted } from "../utils/get-date-formatted";
+import { MedicalRecord } from "../../medical-record/components/medical-record.component";
 
 type Props = {
   appointment: AppointmentModel;
 };
 
 export const PatientAppointment = ({ appointment }: Props) => {
+  const [isOpenMedicalRecord, setIsOpenMedicalRecord] =
+    useState<boolean>(false);
+
+  const openModalMedicalRecord = () => {
+    setIsOpenMedicalRecord(true);
+  };
+
+  const closeModalMedicalRecord = () => {
+    setIsOpenMedicalRecord(false);
+  };
+
   return (
     <>
       <div className="flex flex-col justify-center items-center w-[100%]">
         <div
-          className={`flex flex-col items-center mt-[5%] w-[60%] min-h-[260px] max-h-[300px] rounded-xl ${getStatusColor(
+          className={`flex flex-col items-center mt-[5%] w-[60%] min-h-[260px] rounded-xl ${getStatusColor(
             appointment.status
           )}`}
         >
@@ -31,11 +45,19 @@ export const PatientAppointment = ({ appointment }: Props) => {
               <p className="font-semibold">Specialty: </p>{" "}
               {appointment.doctor.specialty}
             </div>
-            <div className="w-1/5 h-32 flex flex-col justify-center items-center">
+            <div className="w-1/5 h-full flex flex-col justify-center items-center">
               <p className="font-semibold">Description:</p>
-              {appointment.description}
+              <p className="flex-1">{appointment.description}</p>
               <p className="font-semibold">Date:</p>
-              {getDateFormatted(appointment.date.toString())}
+              <p>{getDateFormatted(appointment.date.toString())}</p>
+              {appointment.medicalRecord ? (
+                <p
+                  className="text-blue-700 cursor-pointer"
+                  onClick={openModalMedicalRecord}
+                >
+                  View Medical Record
+                </p>
+              ) : null}
             </div>
             <div className="w-2/5 flex flex-col justify-center items-center">
               <div className="bg-slate-400 h-12 w-12 rounded-full mx-1 flex justify-center items-center text-white">
@@ -52,6 +74,15 @@ export const PatientAppointment = ({ appointment }: Props) => {
           </div>
         </div>
       </div>
+      <Modal
+        className="w-1/2 absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]"
+        isOpen={isOpenMedicalRecord}
+      >
+        <MedicalRecord
+          onClose={closeModalMedicalRecord}
+          appointment={appointment}
+        />
+      </Modal>
     </>
   );
 };

@@ -25,7 +25,7 @@ export const NewAppointment = ({ onClose }: Props) => {
     useState<AppointmentModel>(defaultValues);
   const [doctors, setDoctors] = useState<Doctor[]>([]);
 
-  const handleNewAppointment = async () => {
+  const onNewAppointment = async () => {
     if (
       !newAppointment?.doctorId ||
       newAppointment.description.trim() === "" ||
@@ -36,7 +36,7 @@ export const NewAppointment = ({ onClose }: Props) => {
       });
       return;
     }
-    console.log(newAppointment);
+
     const resp = await createAppointment(newAppointment as AppointmentModel);
     if (resp) {
       onClose();
@@ -107,7 +107,7 @@ export const NewAppointment = ({ onClose }: Props) => {
         </Button>
         <Button
           className="w-[15%] mx-3 bg-[#8e9aaf] hover:bg-[#6f7c91] text-white font-bold py-2 px-7 rounded-3xl focus:outline-none focus:shadow-outline cursor-pointer"
-          onClick={handleNewAppointment}
+          onClick={onNewAppointment}
         >
           Submit
         </Button>

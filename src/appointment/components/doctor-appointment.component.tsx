@@ -8,6 +8,7 @@ import { getDateFormatted } from "../utils/get-date-formatted";
 import { useState } from "react";
 import { NewMedicalRecord } from "../../medical-record/components/new-medical-record.component";
 import { MedicalRecord } from "../../medical-record/components/medical-record.component";
+import { useQueryClient } from "react-query";
 
 type Props = {
   appointment: AppointmentModel;
@@ -17,6 +18,8 @@ export const DoctorAppointment = ({ appointment }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isOpenMedicalRecord, setIsOpenMedicalRecord] =
     useState<boolean>(false);
+  const queryClient = useQueryClient();
+  const queryKey = ["appointments"];
 
   const openModal = () => {
     setIsOpen(true);
@@ -38,9 +41,11 @@ export const DoctorAppointment = ({ appointment }: Props) => {
 
   const handleAppointmentConfirmed = async () => {
     await editAppointment(appointment.id!, "CONFIRMED");
+    await queryClient.invalidateQueries(queryKey);
   };
   const handleAppointmentCanceled = async () => {
     await editAppointment(appointment.id!, "CANCELED");
+    await queryClient.invalidateQueries(queryKey);
   };
 
   return (
@@ -68,7 +73,7 @@ export const DoctorAppointment = ({ appointment }: Props) => {
           </div>
           <div className="w-1/5 h-full flex flex-col justify-center items-center">
             <p className="font-semibold">Description:</p>
-            <p className="flex-1">{appointment.description}</p>
+            <p className="flex-1 text-center">{appointment.description}</p>
             <p className="font-semibold">Date:</p>
             <p className="flex-1">
               {getDateFormatted(appointment.date.toString())}

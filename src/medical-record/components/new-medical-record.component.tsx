@@ -4,6 +4,7 @@ import { useGetAllMedications } from "../../api/medication/useGetAllMedications"
 import { Medication } from "../../medication/model/medication.model";
 import { toast } from "react-toastify";
 import { useCreateMedicalRecord } from "../../api/medical-record/useCreateMedicalRecord";
+import { useQueryClient } from "react-query";
 
 type Props = {
   appointmentId: number;
@@ -19,6 +20,7 @@ export const NewMedicalRecord = ({ onClose, appointmentId }: Props) => {
   const [diagnosis, setDiagnosis] = useState<string>("");
   const [allMedications, setAllMedications] = useState<Medication[]>([]);
   const [dropdownMenu, setDropdownMenu] = useState<boolean>(false);
+  const queryClient = useQueryClient();
 
   const loadAllMedications = async () => {
     const medications = await getAllMedications();
@@ -38,6 +40,7 @@ export const NewMedicalRecord = ({ onClose, appointmentId }: Props) => {
     });
 
     onClose();
+    queryClient.invalidateQueries("appointments");
   };
 
   const handleCheckboxChange = (medication: Medication) => {

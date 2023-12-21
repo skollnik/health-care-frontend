@@ -1,17 +1,19 @@
 import { useState } from "react";
 import Modal from "react-modal";
+import { UseQueryResult, useQuery } from "react-query";
+import { useGetAllAppointmentsByPatientId } from "../../api/appointment/useGetAllAppointmentsByPatientId";
 import { Button } from "../../shared/components/button.component";
 import { Appointment as AppointmentModel } from "../model/appointment.model";
 import { NewAppointment } from "./new-appointment.component";
 import { PatientAppointment } from "./patient-appointment.component";
 
-type Props = {
-  appointments: AppointmentModel[];
-};
-
 Modal.setAppElement("#root");
 
-export const PatientAppointments = ({ appointments }: Props) => {
+export const PatientAppointments = () => {
+  const { getAllAppointmentsByPatientId } = useGetAllAppointmentsByPatientId();
+  const { data: appointments }: UseQueryResult<AppointmentModel[], unknown> =
+    useQuery("appointments", getAllAppointmentsByPatientId);
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const openModal = () => {
@@ -30,7 +32,7 @@ export const PatientAppointments = ({ appointments }: Props) => {
       >
         New Appointment
       </Button>
-      {appointments.map((appointment) => (
+      {appointments?.map((appointment) => (
         <PatientAppointment key={appointment.id} appointment={appointment} />
       ))}
       <Modal

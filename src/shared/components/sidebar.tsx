@@ -1,16 +1,59 @@
 import { useNavigate } from "react-router-dom";
 import { useApplicationStore } from "../../store/application.store";
 import { CiLogout } from "react-icons/ci";
+import { useSocketConnection } from "../../api/socket/useSocketConnection";
+import { Appointment } from "../../appointment/model/appointment.model";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
+import { MedicalRecord } from "../../medical-record/model/medical-record.model";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
   const user = useApplicationStore((state) => state.user);
   const logout = useApplicationStore((state) => state.logout);
+  const { observable } = useSocketConnection();
 
   const onLogout = () => {
     logout();
     navigate("/login");
   };
+
+  useEffect(() => {
+    const appointmentCreatedNotId = observable.bind(
+      "appointmentCreatedNotification",
+      (appointment: Appointment) => {
+        toast.info("New appointment!", {
+          position: "bottom-right",
+        });
+      }
+    );
+
+    const appointmentUpdatedNotId = observable.bind(
+      "appointmentUpdatedNotification",
+      (appointment: Appointment) => {
+        toast.info(`Your appointment has been ${appointment.status}!`, {
+          position: "bottom-right",
+        });
+      }
+    );
+
+    const medicalRecordNotId = observable.bind(
+      "medicalRecordCreatedNotification",
+      (medicalRecord: MedicalRecord) => {
+        toast.info("You have new Medical Record!", {
+          position: "bottom-right",
+        });
+      }
+    );
+
+    return () => {
+      observable.unbind(appointmentCreatedNotId);
+      observable.unbind(appointmentUpdatedNotId);
+      observable.unbind(medicalRecordNotId);
+    };
+  }, []);
+
+  useEffect(() => {}, []);
 
   return (
     <div className="w-[12%] bg-[#16425b] h-screen flex flex-col">

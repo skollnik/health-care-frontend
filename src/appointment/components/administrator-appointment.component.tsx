@@ -46,7 +46,7 @@ export const AdministratorAppointment = ({ appointment }: Props) => {
           </div>
           <div className="w-1/5 h-full flex flex-col justify-center items-center">
             <p className="font-semibold">Description:</p>
-            <p className="flex-1">{appointment.description}</p>
+            <p className="flex-1 text-center">{appointment.description}</p>
             <p className="font-semibold">Date:</p>
             <p>{getDateFormatted(appointment.date.toString())}</p>
             {appointment.medicalRecord ? (

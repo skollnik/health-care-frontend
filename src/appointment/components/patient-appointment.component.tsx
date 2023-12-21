@@ -4,6 +4,7 @@ import { Appointment as AppointmentModel } from "../model/appointment.model";
 import { getStatusColor } from "../status-color.type";
 import { getDateFormatted } from "../utils/get-date-formatted";
 import { MedicalRecord } from "../../medical-record/components/medical-record.component";
+import { useQueryClient } from "react-query";
 
 type Props = {
   appointment: AppointmentModel;
@@ -12,6 +13,8 @@ type Props = {
 export const PatientAppointment = ({ appointment }: Props) => {
   const [isOpenMedicalRecord, setIsOpenMedicalRecord] =
     useState<boolean>(false);
+  const queryClient = useQueryClient();
+  const queryKey = ["appointments"];
 
   const openModalMedicalRecord = () => {
     setIsOpenMedicalRecord(true);
@@ -47,7 +50,7 @@ export const PatientAppointment = ({ appointment }: Props) => {
             </div>
             <div className="w-1/5 h-full flex flex-col justify-center items-center">
               <p className="font-semibold">Description:</p>
-              <p className="flex-1">{appointment.description}</p>
+              <p className="flex-1 text-center">{appointment.description}</p>
               <p className="font-semibold">Date:</p>
               <p>{getDateFormatted(appointment.date.toString())}</p>
               {appointment.medicalRecord ? (

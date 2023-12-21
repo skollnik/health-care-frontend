@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Button } from "../../shared/components/button.component";
-import { useCreateAppointment } from "../../api/appointment/useCreateAppointment";
-import { NewAppointment as AppointmentModel } from "../model/appointment.model";
-import { Doctor } from "../../users/models/doctor.model";
-import { useGetAllDoctors } from "../../api/specialization/useGetAllDoctors";
 import { toast } from "react-toastify";
+import { useCreateAppointment } from "../../api/appointment/useCreateAppointment";
+import { useGetAllDoctors } from "../../api/specialization/useGetAllDoctors";
+import { Button } from "../../shared/components/button.component";
+import { Doctor } from "../../users/models/doctor.model";
+import { NewAppointment as AppointmentModel } from "../model/appointment.model";
+import { useQueryClient } from "react-query";
 
 type Props = {
   onClose: () => void;
@@ -18,6 +19,7 @@ const defaultValues = {
 };
 
 export const NewAppointment = ({ onClose }: Props) => {
+  const queryClient = useQueryClient();
   const { createAppointment } = useCreateAppointment();
   const { getAllDoctors } = useGetAllDoctors();
 
@@ -40,6 +42,7 @@ export const NewAppointment = ({ onClose }: Props) => {
     const resp = await createAppointment(newAppointment as AppointmentModel);
     if (resp) {
       onClose();
+      queryClient.invalidateQueries("appointments");
     }
   };
 

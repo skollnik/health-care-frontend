@@ -6,6 +6,10 @@ import { Appointment } from "../../appointment/model/appointment.model";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { MedicalRecord } from "../../medical-record/model/medical-record.model";
+import { FaHome } from "react-icons/fa";
+import { FaCalendarAlt } from "react-icons/fa";
+import { FaPills } from "react-icons/fa";
+import { FaAddressBook } from "react-icons/fa";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
@@ -72,39 +76,44 @@ export const Sidebar = () => {
       <div className="text-white text-center">{user?.role}</div>
       <div className="flex-1 my-24 text-white">
         <div
-          className="w-full m-3 cursor-pointer hover:text-gray-300"
-          onClick={() => navigate("/")}
+          className="w-full m-3 cursor-pointer hover:text-gray-300 flex items-center"
+          onClick={() => navigate("/home")}
         >
+          <FaHome className="mr-2" size={20} />
           Home
         </div>
         {user?.role === "ADMINISTRATOR" ? (
           <>
             <div
-              className="w-full m-3 cursor-pointer hover:text-gray-300"
+              className="w-full m-3 cursor-pointer hover:text-gray-300 flex items-center"
               onClick={() => navigate("/register-new-doctor")}
             >
+              <FaAddressBook className="mr-2" size={20} />
               Register new doctor
             </div>
             <div
-              className="w-full m-3 cursor-pointer hover:text-gray-300"
+              className="w-full m-3 cursor-pointer hover:text-gray-300 flex items-center"
               onClick={() => navigate("/register-new-patient")}
             >
+              <FaAddressBook className="mr-2" size={20} />
               Register new patient
             </div>
           </>
         ) : null}
         {user?.role === "ADMINISTRATOR" || user?.role === "DOCTOR" ? (
           <div
-            className="w-full m-3 cursor-pointer hover:text-gray-300"
+            className="w-full m-3 cursor-pointer hover:text-gray-300 flex items-center"
             onClick={() => navigate("/medication")}
           >
+            <FaPills className="mr-3" size={20} />
             Medication
           </div>
         ) : null}
         <div
-          className="w-full m-3 cursor-pointer hover:text-gray-300"
+          className="w-full m-3 cursor-pointer hover:text-gray-300 flex items-center"
           onClick={() => navigate("/appointment")}
         >
+          <FaCalendarAlt className="mr-2" size={20} />
           Appointment
         </div>
       </div>
@@ -113,7 +122,7 @@ export const Sidebar = () => {
           className="flex justify-center items-center cursor-pointer"
           onClick={onLogout}
         >
-          <CiLogout color="white" size={30} />
+          <CiLogout color="white" size={30} className="mr-2" />
           <p className="text-lg text-white">Logout</p>
         </div>
       </div>

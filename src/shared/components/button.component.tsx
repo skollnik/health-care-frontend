@@ -4,7 +4,7 @@ type Props = {
   onClick?: () => void;
   className?: string;
   disabled?: boolean;
-  children?: Children;
+  children?: Children | Children[];
 };
 
 export const Button = ({ children, className, onClick, disabled }: Props) => {

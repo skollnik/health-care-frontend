@@ -1,12 +1,7 @@
-import { useEffect, useState } from "react";
-import { useGetAllAppointments } from "../../api/appointment/useGetAllAppointments";
-import { useGetAllAppointmentsByDoctorId } from "../../api/appointment/useGetAllAppointmentsByDoctorId";
-import { useGetAllAppointmentsByPatientId } from "../../api/appointment/useGetAllAppointmentsByPatientId";
 import { useApplicationStore } from "../../store/application.store";
 import { AdministratorAppointments } from "../components/administrator-appointments.component";
 import { DoctorAppointments } from "../components/doctor-appointments.component";
 import { PatientAppointments } from "../components/patient-appointments.component";
-import { Appointment as AppointmentModel } from "../model/appointment.model";
 
 export const AppointmentPage = () => {
   const user = useApplicationStore((state) => state.user);

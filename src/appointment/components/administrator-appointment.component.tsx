@@ -51,7 +51,7 @@ export const AdministratorAppointment = ({ appointment }: Props) => {
             <p>{getDateFormatted(appointment.date.toString())}</p>
             {appointment.medicalRecord ? (
               <p
-                className="text-blue-700 cursor-pointer"
+                className="text-blue-700 cursor-pointer text-center"
                 onClick={openModalMedicalRecord}
               >
                 View Medical Record

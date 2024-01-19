@@ -80,7 +80,7 @@ export const DoctorAppointment = ({ appointment }: Props) => {
             </p>
             {appointment.medicalRecord ? (
               <p
-                className="text-blue-700 cursor-pointer"
+                className="text-blue-700 cursor-pointer text-center"
                 onClick={openModalMedicalRecord}
               >
                 View Medical Record
